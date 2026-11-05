@@ -1,0 +1,10 @@
+# 日志
+*.log
+serve.log
+
+# Python
+__pycache__/
+*.pyc
+
+# 缓存
+.cache/
