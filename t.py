@@ -1,8 +1,8 @@
 import sys, time
 from openai import OpenAI
-base = "http://localhost:8000/v1"
+base = "http://localhost:8080/v1"
 model = sys.argv[1] if len(sys.argv) > 1 else "m"
-c = OpenAI(base_url=base, api_key="EMPTY")
+c = OpenAI(base_url=base, api_key="qwen10086")
 t0 = time.time(); first = None
 for ch in c.chat.completions.create(
         model=model,
