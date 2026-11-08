@@ -50,6 +50,7 @@ python -c "import vllm,torch;print(vllm.__version__,torch.__version__,torch.vers
 3. **uv 缓存无法复用**：若缓存里只有 cu130 的 torch/nvidia/triton wheel，装 cu128 版必须重新下载（缓存目录在 `archive-v0`）。
 4. **transformers 5.x 撞 aimv2 注册**：vLLM 0.9.0 要求 `transformers>=4.51.1` 但无上限，5.20.2 导入即报 `ValueError: 'aimv2' already registered`，需 `transformers<4.54`。
 5. **t.py 端口写死 8000**：恒源云服务端口是 8080，改 `base = "http://localhost:8080/v1"`。
+6. **前台终端被关，服务进程跟着死**：`bash run.sh` 是前台进程，跑它的终端一关/断线，进程收 SIGHUP 直接死。现象：`ps aux | grep -c "vllm serve"` = 1 但 8080 连不上、`nvidia-smi` 显存 0 MiB。解决：重开终端前台重启，起完终端别关；或 `tmux new -s vllm` 里起服务（`Ctrl+B D` 脱离，终端可关）。
 
 ## 未完成
 
